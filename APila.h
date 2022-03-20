@@ -42,16 +42,11 @@ class Apila
             expresionInfija = expresion;
         }
 
-        void setExpresionPostfija(int tamanio, string expresion){
+        void tamanioExpresionPostfija(int tamanio){
             expresionPostfija = new char[tamanio];
         }
 
-        void getExpresionPostfija(){
-            cout<<"Arreglo postfijo: "<<endl;
-        }
-
-        void calcularExpresionPostfija(){
-            auxiliarExpresion = new char[expresionInfija.length()];
+        void calcularExpresionInfija(){
 
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57){
@@ -126,7 +121,6 @@ int prioridadDentroDeLaPila(char caracterExpresionInfija){
                     break;
             }
         }        
-
         
         int Push(int dato){
             if (!esLleno()){

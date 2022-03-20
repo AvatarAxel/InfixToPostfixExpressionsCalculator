@@ -17,11 +17,7 @@ int main(){
         system("clear");
         cout<<"1.  Ingresar el arreglo infijo"<<endl;
         cout<<"2.  Mostrar arreglo postfijo"<<endl;
-        cout<<"3.  Eliminar dato"<<endl;
-        cout<<"4.  Mostrar pares"<<endl;
-        cout<<"5.  Mostrar impares"<<endl;
-        cout<<"6.  Vaciar"<<endl;
-        cout<<"7.  Salir"<<endl;      
+        cout<<"3.  Salir"<<endl;      
         cout<<"Elija una opcion: ";
         
         cin>>opcion;
@@ -35,48 +31,21 @@ int main(){
             cout<<tamanio<<endl;
             objPila.setPila(tamanio);
             objPila.setExpresionInfija(expresion);
-            objPila.setExpresionPostfija(tamanio,expresion);
+            objPila.tamanioExpresionPostfija(tamanio);
             cin.ignore();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 2:
             system("clear");
-            objPila.calcularExpresionPostfija();
+            objPila.calcularExpresionInfija();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 3:
             system("clear");
-            if (objPila.Pop()==-1){
-                cout<<"La pila ya se encuentra vacia"<<endl;
-            }
-            cout<<"Presione ENTER para continuar...";
-            pause();          
-            break;
-        case 4:
-            system("clear");
-            objPila.calcularExpresionPostfija();
-            cout<<"Presione ENTER para continuar...";
-            pause();            
-            break;
-        case 5:
-            system("clear");
-            objPila.mostraInpares(0);
-            cout<<"Presione ENTER para continuar...";
-            pause();            
-            break;
-        case 6:
-            system("clear");
-            objPila.Clear();
-            cout<<"Pila vaciada"<<endl;
-            cout<<"Presione ENTER para continuar...";
-            pause();            
-            break;
-        case 7:
-            system("clear");
             cout<<"Finalizado"<<endl;
-            cout<<"Presione ENTER para continuar...";
+            cout<<"Presione ENTER para salir...";
             pause();
             break;           
         default:
@@ -86,7 +55,7 @@ int main(){
             pause();
             break;
         }
-    }while(opcion != 7);
+    }while(opcion != 3);
         
     return 0;
 }
