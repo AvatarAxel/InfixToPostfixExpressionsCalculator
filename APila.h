@@ -10,6 +10,7 @@ class Apila
         int valorPrioridadDentroPila;
         char *auxiliarExpresion;
         char *expresionPostfija;
+        int contadorExpresionPostfija = 0;
         string expresionInfija;           
         
         bool esLleno(){
@@ -60,37 +61,65 @@ class Apila
         }
 
         void calcularExpresionInfija(){
-
+            contadorExpresionPostfija = 0;
             for (int i = 0; i < expresionInfija.length() ; i++){
-                if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57){
-                    expresionPostfija[i] = expresionInfija.at(i);
-                    cout<<"Valor agregado a la expresion postfija: "<<expresionPostfija[i]<<endl;
+                if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57 || expresionInfija.at(i) >= 65 and expresionInfija.at(i) <= 90 || expresionInfija.at(i) >= 97 and expresionInfija.at(i) <= 122){
+                    expresionPostfija[contadorExpresionPostfija] = expresionInfija.at(i);
+                    cout<<"Valor agregado a la expresion postfija: "<<expresionPostfija[contadorExpresionPostfija]<<endl;
+                    contadorExpresionPostfija++;
                 }else{
                     if (expresionInfija.at(i) != ')'){
                         if (esVacio()){
                             Push(expresionInfija.at(i));
                             cout<<"Valor agregado a la pila: "<<expresionInfija.at(i)<<endl;
                         }else{
-                            if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(pila[tope])){
-                                Push(expresionInfija.at(i));
-                            }else{
-                                expresionPostfija[i] = pila[tope];
-                                Pop();                                
-                            }
+                            compararPrioridades(i);
                         }                        
                     }else{
-                       do{
-                            if (Top() == '('){
-                                Pop();
-                                break;
-                            }else{
-                                expresionPostfija[i] = pila[tope];
-                                Pop();
-                            }
-                       }while (esVacio() == false);                      
+                        pilaAPostfija();
+                    //    do{
+                    //         if (Top() == '('){
+                    //             expresionPostfija[contadorExpresionPostfija] = pila[tope];
+                    //             /*cout<<"Valor agregado a la expresion postfija "<<expresionPostfija[contadorExpresionPostfija];
+                    //             contadorExpresionPostfija++;*/
+                    //             Pop();
+                    //             break;
+                    //         }else{
+                    //             expresionPostfija[contadorExpresionPostfija] = pila[tope];
+                    //             contadorExpresionPostfija++;
+                    //             Pop();
+                    //         }
+                    //    }while (esVacio() == false);                      
                     }
                 }
             }
+        }
+
+        void compararPrioridades(int i){
+            if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(pila[tope])){
+                Push(expresionInfija.at(i));
+                cout<<"Valor agregado a la expresion pila: "<<expresionInfija.at(i)<<endl;
+                return;
+            }else{
+                expresionPostfija[contadorExpresionPostfija] = pila[tope];
+                Pop();
+                cout<<"Valor agregado a la expresion postfija: "<<expresionPostfija[contadorExpresionPostfija]<<endl;
+                contadorExpresionPostfija++;
+                compararPrioridades(i);
+            }   
+        }
+
+        void pilaAPostfija(){
+            if (Top() == '('){
+                Pop();
+                return;
+            }else{
+                expresionPostfija[contadorExpresionPostfija] = pila[tope];
+                cout<<"Valor agregado a la expresion postfija: "<<expresionPostfija[contadorExpresionPostfija]<<endl;
+                contadorExpresionPostfija++;
+                Pop();
+                pilaAPostfija();
+            }      
         }
 
         int prioridadFueraDeLaPila(char caracterExpresionInfija){

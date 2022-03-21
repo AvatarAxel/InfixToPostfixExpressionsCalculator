@@ -42,7 +42,6 @@ int main(){
             //cout<<"Contenido de la pila: "<<endl;
             //objPila.showAll(objPila.getTope());
             objPila.getExpresionPostfija();
-
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
@@ -51,7 +50,14 @@ int main(){
             cout<<"Finalizado"<<endl;
             cout<<"Presione ENTER para salir...";
             pause();
-            break;           
+            break; 
+        case 4:
+            system("clear");
+            cout<<"Contenido de la pila: "<<endl;
+            objPila.showAll(objPila.getTope());
+            cout<<"Presione ENTER para continuar...";
+            pause();
+            break;                      
         default:
             system("clear");
             cout<<"Valor invalido, presione ENTER para continuar...";
