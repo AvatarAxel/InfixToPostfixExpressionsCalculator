@@ -9,6 +9,7 @@ class Apila
         int valorPriodadFueraPila;
         int valorPrioridadDentroPila;
         char *auxiliarExpresion;
+        int contadorParantesis = 0;
         char *expresionPostfija;
         int indiceExpresionPostfija = 0;
         string expresionInfija;           
@@ -49,22 +50,35 @@ class Apila
         }
 
         void getExpresionPostfija(){
+            cout<<"Contador de paretesis: "<<contadorParantesis<<endl;
+            int tamanio = expresionInfija.length() - contadorParantesis;
             cout<<"expresionPostfija: ";
-            for (int i = 0; i < expresionInfija.length(); i++){
+            for (int i = 0; i < tamanio; i++){
+                //cout<<" E"<<i<<": ";
                 cout<<expresionPostfija[i];
             }
             cout<<endl;
+        }
+
+        void calcularParentesis(){
+            contadorParantesis = 0;
+            for (int i = 0; i < expresionInfija.length(); i++){
+                if (expresionInfija.at(i) == ')' || expresionInfija.at(i) == '('){
+                    contadorParantesis++;
+                }
+            }
         }
 
         void tamanioExpresionPostfija(int tamanio){
             expresionPostfija = new char[tamanio];
         }
 
-        void calcularExpresionInfija(){
+        void calcularExpresionPostfija(){
             indiceExpresionPostfija = 0;
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57 || expresionInfija.at(i) >= 65 and expresionInfija.at(i) <= 90 || expresionInfija.at(i) >= 97 and expresionInfija.at(i) <= 122){
                     expresionPostfija[indiceExpresionPostfija] = expresionInfija.at(i);
+                    cout<<"Elemento agregado al arreglo postfijo LyN: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                     indiceExpresionPostfija++;
                 }else{
                     if (expresionInfija.at(i) != ')'){
@@ -87,6 +101,7 @@ class Apila
                 return;
             }else{
                 expresionPostfija[indiceExpresionPostfija] = pila[tope];
+                cout<<"Elemento agregado al arreglo postfijo: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 Pop();
                 indiceExpresionPostfija++;
                 compararPrioridades(i);
@@ -95,10 +110,15 @@ class Apila
 
         void pilaAPostfija(){
             if (Top() == '('){
+                cout<<"No seguira bye"<<endl;
                 Pop();
                 return;
             }else{
+                if (esVacio() == true){
+                    return;
+                }
                 expresionPostfija[indiceExpresionPostfija] = pila[tope];
+                cout<<"Elemento agregado al arreglo postfijoxd: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 indiceExpresionPostfija++;
                 Pop();
                 pilaAPostfija();
@@ -110,6 +130,7 @@ class Apila
                 return;
             }else{
                 expresionPostfija[indiceExpresionPostfija] = pila[tope];
+                cout<<"Elemento agregado al arreglo postfijo lol: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 indiceExpresionPostfija++;
                 Pop();
                 pasarTodoContenidoDePilaAPost();
@@ -184,6 +205,7 @@ class Apila
             if (!esLleno()){
                 tope++;          
                 pila[tope] = dato;
+                cout<<"Elemento agregado: "<<dato<<endl;
             }else{
                 return -1;
             }    
@@ -195,6 +217,7 @@ class Apila
                 caracter = pila[tope];
                 pila[tope] = -1;
                 tope--;
+                cout<<"Elemento eliminado de la pila: "<<caracter<<endl;
                 return 1;//Para saber que si saco el elemento
             }else{
                 return -1;

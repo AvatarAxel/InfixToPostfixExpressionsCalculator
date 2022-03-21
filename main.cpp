@@ -31,13 +31,14 @@ int main(){
             objPila.setPila(tamanio);
             objPila.setExpresionInfija(expresion);
             objPila.tamanioExpresionPostfija(tamanio);
+            objPila.calcularParentesis();
             cin.ignore();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 2:
             system("clear");
-            objPila.calcularExpresionInfija();
+            objPila.calcularExpresionPostfija();
             objPila.getExpresionPostfija();
             cout<<"Presione ENTER para continuar...";
             pause();
