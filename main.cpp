@@ -39,6 +39,8 @@ int main(){
         case 2:
             system("clear");
             objPila.calcularExpresionInfija();
+            cout<<"Contenido de la pila: "<<endl;
+            objPila.showAll(0);
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
@@ -50,8 +52,7 @@ int main(){
             break;           
         default:
             system("clear");
-            cout<<"Valor invalido, pulse enter para continuar...";
-            cout<<"Presione ENTER para continuar...";
+            cout<<"Valor invalido, presione ENTER para continuar...";
             pause();
             break;
         }

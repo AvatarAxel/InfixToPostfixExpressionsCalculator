@@ -3,7 +3,7 @@ using namespace std;
 class Apila
 {
     private:
-        int *pila;
+        char *pila;
         int tope;
         int _pilaSize;
         int valor;
@@ -34,7 +34,7 @@ class Apila
         }
         
         void setPila(int tamanio){
-            pila = new int[tamanio];
+            pila = new char[tamanio];
             _pilaSize = tamanio-1;
         }
 
@@ -50,10 +50,11 @@ class Apila
 
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57){
-                    cout<<"Es un numero: "<<expresionInfija.at(i)<<endl;
+                    expresionPostfija[i] = expresionInfija.at(i);
+                    cout<<"Valor agregado a la expreción postfija: "<<expresionPostfija[i]<<endl;
                 }else{
-                    cout<<"Simbolo: "<<expresionInfija.at(i)<<endl;
-                    cout<<"valor del simbolo: "<<prioridadFueraDeLaPila(expresionInfija.at(i))<<endl;
+                    Push(expresionInfija.at(i));
+                    cout<<"Valor agregado a la pila: "<<expresionInfija.at(i)<<endl;
                 }
             }
         }
@@ -90,7 +91,7 @@ class Apila
             }
         }
 
-int prioridadDentroDeLaPila(char caracterExpresionInfija){
+        int prioridadDentroDeLaPila(char caracterExpresionInfija){
             switch (caracterExpresionInfija){
                 case '^':
                     valor = 3;
@@ -120,9 +121,9 @@ int prioridadDentroDeLaPila(char caracterExpresionInfija){
                     return -1;
                     break;
             }
-        }        
-        
-        int Push(int dato){
+        }
+
+        int Push(char dato){
             if (!esLleno()){
                 tope++;          
                 pila[tope] = dato;
@@ -133,12 +134,12 @@ int prioridadDentroDeLaPila(char caracterExpresionInfija){
 
         int Pop(){
             if (!esVacio()){
-                int num;
-                num = pila[tope];
+                char caracter;
+                caracter = pila[tope];
                 pila[tope] = -1;
                 tope--;
-                cout<<"Dato eliminado: "<<num<<endl;
-                return num;//Para saber que si saco el elemento
+                cout<<"Dato eliminado: "<<caracter<<endl;
+                return caracter;//Para saber que si saco el elemento
             }else{
                 return -1;
             }
@@ -166,29 +167,8 @@ int prioridadDentroDeLaPila(char caracterExpresionInfija){
                 return;
             }else{
                 cout<<pila[cont]<<endl;
+                
                 showAll(cont+1);
             }
-        }
-
-        void mostraPares(int cont){
-            if (cont > tope){
-                return;
-            }else{
-                if (pila[cont]%2==0){
-                    cout<<pila[cont]<<endl;
-                }
-                mostraPares(cont+1);
-            }
-        }
-        
-        void mostraInpares(int cont){
-            if (cont > tope){
-                return;
-            }else{
-                if (pila[cont]%2!=0){
-                    cout<<pila[cont]<<endl;
-                }
-                mostraInpares(cont+1);
-            }
-        }        
+        }      
 };
