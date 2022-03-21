@@ -6,7 +6,8 @@ class Apila
         char *pila;
         int tope;
         int _pilaSize;
-        int valor;
+        int valorPriodadFueraPila;
+        int valorPrioridadDentroPila;
         char *auxiliarExpresion;
         char *expresionPostfija;
         string expresionInfija;           
@@ -42,6 +43,18 @@ class Apila
             expresionInfija = expresion;
         }
 
+        int getTope(){
+            return tope;
+        }
+
+        void getExpresionPostfija(){
+            cout<<"expresionPostfija: ";
+            for (int i = 0; i < expresionInfija.length(); i++){
+                cout<<expresionPostfija[i];
+            }
+            cout<<endl;
+        }
+
         void tamanioExpresionPostfija(int tamanio){
             expresionPostfija = new char[tamanio];
         }
@@ -51,10 +64,31 @@ class Apila
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57){
                     expresionPostfija[i] = expresionInfija.at(i);
-                    cout<<"Valor agregado a la expreción postfija: "<<expresionPostfija[i]<<endl;
+                    cout<<"Valor agregado a la expresion postfija: "<<expresionPostfija[i]<<endl;
                 }else{
-                    Push(expresionInfija.at(i));
-                    cout<<"Valor agregado a la pila: "<<expresionInfija.at(i)<<endl;
+                    if (expresionInfija.at(i) != ')'){
+                        if (esVacio()){
+                            Push(expresionInfija.at(i));
+                            cout<<"Valor agregado a la pila: "<<expresionInfija.at(i)<<endl;
+                        }else{
+                            if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(pila[tope])){
+                                Push(expresionInfija.at(i));
+                            }else{
+                                expresionPostfija[i] = pila[tope];
+                                Pop();                                
+                            }
+                        }                        
+                    }else{
+                       do{
+                            if (Top() == '('){
+                                Pop();
+                                break;
+                            }else{
+                                expresionPostfija[i] = pila[tope];
+                                Pop();
+                            }
+                       }while (esVacio() == false);                      
+                    }
                 }
             }
         }
@@ -62,28 +96,28 @@ class Apila
         int prioridadFueraDeLaPila(char caracterExpresionInfija){
             switch (caracterExpresionInfija){
                 case '^':
-                    valor = 4;
-                    return valor;
+                    valorPriodadFueraPila = 4;
+                    return valorPriodadFueraPila;
                     break;
                 case '*':
-                    valor = 2;
-                    return valor;
+                    valorPriodadFueraPila = 2;
+                    return valorPriodadFueraPila;
                     break;
                 case '/':
-                    valor = 2;
-                    return valor;
+                    valorPriodadFueraPila = 2;
+                    return valorPriodadFueraPila;
                     break;
                 case '+':
-                    valor = 1;
-                    return valor;
+                    valorPriodadFueraPila = 1;
+                    return valorPriodadFueraPila;
                     break;
                 case '-':
-                    valor = 1;
-                    return valor;
+                    valorPriodadFueraPila = 1;
+                    return valorPriodadFueraPila;
                     break;
                 case '(':
-                    valor = 5;
-                    return valor;
+                    valorPriodadFueraPila = 5;
+                    return valorPriodadFueraPila;
                     break;
                 default:
                     return -1;
@@ -94,28 +128,28 @@ class Apila
         int prioridadDentroDeLaPila(char caracterExpresionInfija){
             switch (caracterExpresionInfija){
                 case '^':
-                    valor = 3;
-                    return valor;
+                    valorPrioridadDentroPila = 3;
+                    return valorPrioridadDentroPila;
                     break;
                 case '*':
-                    valor = 2;
-                    return valor;
+                    valorPrioridadDentroPila = 2;
+                    return valorPrioridadDentroPila;
                     break;
                 case '/':
-                    valor = 2;
-                    return valor;
+                    valorPrioridadDentroPila = 2;
+                    return valorPrioridadDentroPila;
                     break;
                 case '+':
-                    valor = 1;
-                    return valor;
+                    valorPrioridadDentroPila = 1;
+                    return valorPrioridadDentroPila;
                     break;
                 case '-':
-                    valor = 1;
-                    return valor;
+                    valorPrioridadDentroPila = 1;
+                    return valorPrioridadDentroPila;
                     break;
                 case '(':
-                    valor = 0;
-                    return valor;
+                    valorPrioridadDentroPila = 0;
+                    return valorPrioridadDentroPila;
                     break;
                 default:
                     return -1;
@@ -139,7 +173,7 @@ class Apila
                 pila[tope] = -1;
                 tope--;
                 cout<<"Dato eliminado: "<<caracter<<endl;
-                return caracter;//Para saber que si saco el elemento
+                return 1;//Para saber que si saco el elemento
             }else{
                 return -1;
             }
@@ -163,12 +197,11 @@ class Apila
         }
 
         void showAll(int cont){
-            if (cont > tope){
+            if (cont == -1){
                 return;
             }else{
                 cout<<pila[cont]<<endl;
-                
-                showAll(cont+1);
+                showAll(cont-1);
             }
         }      
 };

@@ -39,8 +39,10 @@ int main(){
         case 2:
             system("clear");
             objPila.calcularExpresionInfija();
-            cout<<"Contenido de la pila: "<<endl;
-            objPila.showAll(0);
+            //cout<<"Contenido de la pila: "<<endl;
+            //objPila.showAll(objPila.getTope());
+            objPila.getExpresionPostfija();
+
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
