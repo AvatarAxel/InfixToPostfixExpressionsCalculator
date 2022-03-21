@@ -28,7 +28,6 @@ int main(){
             cout<<"Ingrese la expresion aritmetica infija: ";
             cin>>expresion;
             tamanio = expresion.length();
-            cout<<tamanio<<endl;
             objPila.setPila(tamanio);
             objPila.setExpresionInfija(expresion);
             objPila.tamanioExpresionPostfija(tamanio);
@@ -39,8 +38,6 @@ int main(){
         case 2:
             system("clear");
             objPila.calcularExpresionInfija();
-            //cout<<"Contenido de la pila: "<<endl;
-            //objPila.showAll(objPila.getTope());
             objPila.getExpresionPostfija();
             cout<<"Presione ENTER para continuar...";
             pause();
@@ -50,14 +47,7 @@ int main(){
             cout<<"Finalizado"<<endl;
             cout<<"Presione ENTER para salir...";
             pause();
-            break; 
-        case 4:
-            system("clear");
-            cout<<"Contenido de la pila: "<<endl;
-            objPila.showAll(objPila.getTope());
-            cout<<"Presione ENTER para continuar...";
-            pause();
-            break;                      
+            break;                   
         default:
             system("clear");
             cout<<"Valor invalido, presione ENTER para continuar...";
