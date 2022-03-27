@@ -1,6 +1,7 @@
 #include <iostream>
-#include <string.h>
-#include "APila.h"
+#include <cstdlib>//Castear de int a char y de char int
+//#include "APila.h"
+#include "operaciones.h"
 using namespace std;
 
 void pause();
@@ -11,6 +12,7 @@ int main(){
     int dato;
     string expresion;
     
+    operaciones objOperaciones;
     Apila objPila;
     objPila.inicializar();
     do{
@@ -29,17 +31,17 @@ int main(){
             cin>>expresion;
             tamanio = expresion.length();
             objPila.setPila(tamanio);
-            objPila.setExpresionInfija(expresion);
-            objPila.tamanioExpresionPostfija(tamanio);
-            objPila.calcularParentesis();
+            objOperaciones.setExpresionInfija(expresion);
+            objOperaciones.tamanioExpresionPostfija(tamanio);
+            objOperaciones.calcularParentesis();
             cin.ignore();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 2:
             system("clear");
-            objPila.calcularExpresionPostfija();
-            objPila.getExpresionPostfija();
+            objOperaciones.calcularExpresionPostfija();
+            objOperaciones.getExpresionPostfija();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
