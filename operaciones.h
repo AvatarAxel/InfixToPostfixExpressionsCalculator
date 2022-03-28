@@ -15,12 +15,10 @@ class operaciones
     public:
         Apila objPila;
 
-        void inicializarPila(){
-            
-        }
-
         void setExpresionInfija(string expresion){
             expresionInfija = expresion;
+            objPila.inicializar();
+            objPila.setPila(expresionInfija.length());
         }
 
         void getExpresionPostfija(){

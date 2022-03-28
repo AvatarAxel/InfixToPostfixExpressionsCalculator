@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>//Castear de int a char y de char int
-//#include "APila.h"
 #include "operaciones.h"
 using namespace std;
 
@@ -13,8 +12,6 @@ int main(){
     string expresion;
     
     operaciones objOperaciones;
-    Apila objPila;
-    objPila.inicializar();
     do{
         system("clear");
         cout<<"1.  Ingresar el arreglo infijo"<<endl;
@@ -30,7 +27,6 @@ int main(){
             cout<<"Ingrese la expresion aritmetica infija: ";
             cin>>expresion;
             tamanio = expresion.length();
-            objPila.setPila(tamanio);
             objOperaciones.setExpresionInfija(expresion);
             objOperaciones.tamanioExpresionPostfija(tamanio);
             objOperaciones.calcularParentesis();
