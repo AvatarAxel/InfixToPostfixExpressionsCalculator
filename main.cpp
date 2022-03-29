@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>//Castear de int a char y de char int
 #include "operaciones.h"
 using namespace std;
 
@@ -16,7 +15,8 @@ int main(){
         system("clear");
         cout<<"1.  Ingresar el arreglo infijo"<<endl;
         cout<<"2.  Mostrar arreglo postfijo"<<endl;
-        cout<<"3.  Salir"<<endl;      
+        cout<<"3.  Mostrar resultado de la expresion"<<endl;
+        cout<<"4.  Salir"<<endl;              
         cout<<"Elija una opcion: ";
         
         cin>>opcion;
@@ -37,16 +37,22 @@ int main(){
         case 2:
             system("clear");
             objOperaciones.calcularExpresionPostfija();
-            objOperaciones.getExpresionPostfija();
+            cout<<"expresion postfija: "<<objOperaciones.getExpresionPostfija()<<endl;
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 3:
             system("clear");
-            cout<<"Finalizado"<<endl;
+            cout<<"Aun no disponible"<<endl;
             cout<<"Presione ENTER para salir...";
             pause();
-            break;                   
+            break;
+        case 4:
+            system("clear");
+            cout<<"Finalizado"<<endl;
+            cout<<"Presione ENTER para continuar...";
+            pause();
+            break;                               
         default:
             system("clear");
             cout<<"Valor invalido, presione ENTER para continuar...";
@@ -58,7 +64,6 @@ int main(){
     return 0;
 }
 
-//Funcion para poder poner pause en UNIX y esperar un ENTER
 void pause(){
     const char ENTER = '\n';
     char lectura = cin.get();

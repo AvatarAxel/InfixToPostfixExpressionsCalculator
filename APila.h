@@ -4,7 +4,7 @@ class Apila
 {
 
     private:
-        char *pila;//Cambiarla al tipo string
+        string *pila;
         int tope;
         int _pilaSize;          
 
@@ -30,7 +30,7 @@ class Apila
         }
         
         void setPila(int tamanio){
-            pila = new char[tamanio];
+            pila = new string[tamanio];
             _pilaSize = tamanio-1;
         }
 
@@ -50,7 +50,7 @@ class Apila
 
         int Pop(){
             if (!esVacio()){
-                char caracter;
+                string caracter;
                 caracter = pila[tope];
                 pila[tope] = -1;
                 tope--;
@@ -60,11 +60,11 @@ class Apila
             }
         }
 
-        int Top(){
+        string Top(){
             if (!esVacio()){
                 return pila[tope];
             }else{
-                return -1;
+                return "ERROR";
             }
         }
 

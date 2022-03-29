@@ -1,5 +1,7 @@
 #include <iostream>
 #include "APila.h"
+#include <string>
+
 //#include <> agregar libreria matematica
 using namespace std;
 class operaciones
@@ -10,6 +12,7 @@ class operaciones
         int contadorParantesis = 0;
         char *expresionPostfija;
         int indiceExpresionPostfija = 0;
+        string string_expresionPostfija;
         string expresionInfija; 
 
     public:
@@ -21,14 +24,16 @@ class operaciones
             objPila.setPila(expresionInfija.length());
         }
 
-        void getExpresionPostfija(){
+        string getExpresionPostfija(){
+            string_expresionPostfija = "";
             int tamanio = expresionInfija.length() - contadorParantesis;
-            cout<<"Expresion Postfija: ";
             for (int i = 0; i < tamanio; i++){
-                cout<<expresionPostfija[i];
+                string_expresionPostfija+=expresionPostfija[i];
             }
-            cout<<endl;
+            return string_expresionPostfija;
         }
+
+
 
         void calcularParentesis(){
             contadorParantesis = 0;
@@ -65,11 +70,11 @@ class operaciones
         }   
 
         void compararPrioridades(int i){
-            if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top())){
+            if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top().at(0))){
                 objPila.Push(expresionInfija.at(i));
                 return;
             }else{
-                expresionPostfija[indiceExpresionPostfija] = objPila.Top();
+                expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
                 objPila.Pop();
                 indiceExpresionPostfija++;
                 compararPrioridades(i);
@@ -77,14 +82,14 @@ class operaciones
         }          
 
         void pilaAPostfija(){
-            if (objPila.Top() == '('){
+            if (objPila.Top().at(0) == '('){
                 objPila.Pop();
                 return;
             }else{
                 if (objPila.esVacio() == true){
                     return;
                 }
-                expresionPostfija[indiceExpresionPostfija] = objPila.Top();
+                expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
                 indiceExpresionPostfija++;
                 objPila.Pop();
                 pilaAPostfija();
@@ -95,7 +100,7 @@ class operaciones
             if (objPila.esVacio()){
                 return;
             }else{
-                expresionPostfija[indiceExpresionPostfija] = objPila.Top();
+                expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
                 indiceExpresionPostfija++;
                 objPila.Pop();
                 pasarTodoContenidoDePilaAPost();
@@ -164,6 +169,15 @@ class operaciones
                     return -1;
                     break;
             }
-        }                                  
+        }
+
+        //Encontrar el resultado  
+
+        /*void evaluarExpresion(){
+            if (){
+                
+            }
+            
+        }*/                                                       
 
 };
