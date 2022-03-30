@@ -173,11 +173,20 @@ class operaciones
 
         //Encontrar el resultado  
 
-        /*void evaluarExpresion(){
-            if (){
+        void evaluarExpresion(){
+            for (int i = 0; i < string_expresionPostfija.length(); i++){
+                //agregarOperandosPila(i);
+                
                 
             }
             
-        }*/                                                       
+        }                                               
+
+        /*void agregarOperandosPila(int indice){
+            if (string_expresionPostfija.at(indice) == ){
+
+            }
+            
+        }*/
 
 };
