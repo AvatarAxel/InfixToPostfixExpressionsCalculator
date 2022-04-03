@@ -14,6 +14,7 @@ class operaciones
         int indiceExpresionPostfija = 0;
         string string_expresionPostfija;
         string expresionInfija;
+        bool auxiliar = true;
         int numero01 = 0;
         int numero02 = 0;
         int resultado = 0; 
@@ -35,7 +36,7 @@ class operaciones
                 cout<<expresionPostfija[i]<<endl;
                 //cout<<i+1;
             }
-            cout<<endl;
+            //cout<<endl;
         }
 
 
@@ -65,13 +66,18 @@ class operaciones
             vaciarExpresionPostfija();
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57 || expresionInfija.at(i) >= 65 and expresionInfija.at(i) <= 90 || expresionInfija.at(i) >= 97 and expresionInfija.at(i) <= 122){
+                    if (auxiliar == false){
+                        indiceExpresionPostfija++;
+                    }
                     expresionPostfija[indiceExpresionPostfija] += expresionInfija.at(i);
+                    auxiliar = true;
                     //indiceExpresionPostfija++;                        
                 }else{
+                    auxiliar = false;
                     if (expresionInfija.at(i) != ')'){
                         if (objPila.esVacio()){
                             objPila.Push(expresionInfija.at(i));
-                            indiceExpresionPostfija++;
+                            //indiceExpresionPostfija++;
                         }else{
                             //indiceExpresionPostfija++;
                             compararPrioridades(i);
@@ -87,7 +93,7 @@ class operaciones
         void compararPrioridades(int i){
             if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top().at(0))){
                 objPila.Push(expresionInfija.at(i));
-                indiceExpresionPostfija++;//TENTADOR
+                //indiceExpresionPostfija++;//TENTADOR
                 return;
             }else{
                 indiceExpresionPostfija++;
