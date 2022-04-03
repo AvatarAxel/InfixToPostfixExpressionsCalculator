@@ -2,7 +2,6 @@
 #include "APila.h"
 #include <string>
 
-//#include <> agregar libreria matematica
 using namespace std;
 class operaciones
 {
@@ -10,10 +9,14 @@ class operaciones
         int valorPriodadFueraPila;
         int valorPrioridadDentroPila;
         int contadorParantesis = 0;
-        char *expresionPostfija;
+        int tamanioExpresionPostfija = 0;
+        string *expresionPostfija;
         int indiceExpresionPostfija = 0;
         string string_expresionPostfija;
-        string expresionInfija; 
+        string expresionInfija;
+        int numero01 = 0;
+        int numero02 = 0;
+        int resultado = 0; 
 
     public:
         Apila objPila;
@@ -24,13 +27,14 @@ class operaciones
             objPila.setPila(expresionInfija.length());
         }
 
-        string getExpresionPostfija(){
-            string_expresionPostfija = "";
-            int tamanio = expresionInfija.length() - contadorParantesis;
-            for (int i = 0; i < tamanio; i++){
-                string_expresionPostfija+=expresionPostfija[i];
+        void getExpresionPostfija(){
+            //string_expresionPostfija = "";
+            //int tamanio = expresionInfija.length() - contadorParantesis;
+            
+            for (int i = 0; i < tamanioExpresionPostfija; i++){
+                cout<<expresionPostfija[i];
             }
-            return string_expresionPostfija;
+            cout<<endl;
         }
 
 
@@ -44,8 +48,9 @@ class operaciones
             }
         }
 
-        void tamanioExpresionPostfija(int tamanio){
-            expresionPostfija = new char[tamanio];
+        void setTamanioExpresionPostfija(int tamanio){
+            tamanioExpresionPostfija = tamanio - contadorParantesis;
+            expresionPostfija = new string[tamanioExpresionPostfija];
         }      
 
         void calcularExpresionPostfija(){
@@ -173,20 +178,49 @@ class operaciones
 
         //Encontrar el resultado  
 
-        void evaluarExpresion(){
-            for (int i = 0; i < string_expresionPostfija.length(); i++){
-                //agregarOperandosPila(i);
-                
-                
+        /*void evaluarExpresion(){
+            objPila.inicializar();
+            for (int i = 0; i < string_expresionPostfija.length(); i++){   
+                if (!identificadorOperandos(string_expresionPostfija.at(i))){
+                    objPila.Push(string_expresionPostfija.at(i));
+                    cout<<"Si es: "<<string_expresionPostfija.at(i)<<endl;
+                }else{
+                    if (!objPila.esVacio()){                      
+                        numero01 = (int)objPila.Top();
+                        objPila.Pop();
+                        numero02 = (int)objPila.Top();
+                        objPila.Pop();
+                        resultado = numero01 string_expresionPostfija.at(i) numero02;
+                        cout<<"No es: "<<resultado;
+                    }
+                }              
             }
-            
-        }                                               
-
-        /*void agregarOperandosPila(int indice){
-            if (string_expresionPostfija.at(indice) == ){
-
-            }
-            
         }*/
+
+
+        bool identificadorOperandos(char caracterExpresionInfija){
+            switch (caracterExpresionInfija){
+                case '^':
+                    return true;
+                    break;
+                case '*':
+                    return true;
+                    break;
+                case '/':
+                    return true;
+                    break;
+                case '+':
+                    return true;
+                    break;
+                case '-':
+                    return true;
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }
+                                                      
+
 
 };

@@ -28,8 +28,8 @@ int main(){
             cin>>expresion;
             tamanio = expresion.length();
             objOperaciones.setExpresionInfija(expresion);
-            objOperaciones.tamanioExpresionPostfija(tamanio);
             objOperaciones.calcularParentesis();
+            objOperaciones.setTamanioExpresionPostfija(tamanio);
             cin.ignore();
             cout<<"Presione ENTER para continuar...";
             pause();
@@ -37,14 +37,14 @@ int main(){
         case 2:
             system("clear");
             objOperaciones.calcularExpresionPostfija();
-            cout<<"expresion postfija: "<<objOperaciones.getExpresionPostfija()<<endl;
+            //cout<<"expresion postfija: "<<objOperaciones.getExpresionPostfija()<<endl;
+            objOperaciones.getExpresionPostfija();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 3:
             system("clear");
-            cout<<"Aun no disponible"<<endl;
-            cout<<"Presione ENTER para salir...";
+            //objOperaciones.evaluarExpresion();
             pause();
             break;
         case 4:
