@@ -32,7 +32,8 @@ class operaciones
             //int tamanio = expresionInfija.length() - contadorParantesis;
             
             for (int i = 0; i < tamanioExpresionPostfija; i++){
-                cout<<expresionPostfija[i];
+                cout<<expresionPostfija[i]<<endl;
+                //cout<<i+1;
             }
             cout<<endl;
         }
@@ -53,22 +54,40 @@ class operaciones
             expresionPostfija = new string[tamanioExpresionPostfija];
         }      
 
+        void vaciarExpresionPostfija(){
+            for (int i = 0; i < tamanioExpresionPostfija; i++){
+                expresionPostfija[i] = "";
+            }
+        }
+
         void calcularExpresionPostfija(){
             indiceExpresionPostfija = 0;
+            vaciarExpresionPostfija();
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57 || expresionInfija.at(i) >= 65 and expresionInfija.at(i) <= 90 || expresionInfija.at(i) >= 97 and expresionInfija.at(i) <= 122){
-                    expresionPostfija[indiceExpresionPostfija] = expresionInfija.at(i);
-                    indiceExpresionPostfija++;
+                    expresionPostfija[indiceExpresionPostfija] += expresionInfija.at(i);
+                    //indiceExpresionPostfija++;
+                    cout<<"Valor agregado: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 }else{
+                    //indiceExpresionPostfija++;
                     if (expresionInfija.at(i) != ')'){
                         if (objPila.esVacio()){
                             objPila.Push(expresionInfija.at(i));
+                            indiceExpresionPostfija++;
+                            cout<<"Valor del indice01: "<<indiceExpresionPostfija<<endl;
                         }else{
+                            indiceExpresionPostfija++;
+                            cout<<"Valor del indice02: "<<indiceExpresionPostfija<<endl;
                             compararPrioridades(i);
-                        }                        
+                            //indiceExpresionPostfija++;
+                        }
                     }else{
-                        pilaAPostfija();                     
+                        indiceExpresionPostfija++;
+                        cout<<"Valor del indice03: "<<indiceExpresionPostfija<<endl;
+                        pilaAPostfija();
+                        //indiceExpresionPostfija++;                     
                     }
+                    //indiceExpresionPostfija++; 
                 }
             }
             pasarTodoContenidoDePilaAPost();
@@ -77,13 +96,18 @@ class operaciones
         void compararPrioridades(int i){
             if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top().at(0))){
                 objPila.Push(expresionInfija.at(i));
+                //cout<<"Se agrego un espacio";
+                //indiceExpresionPostfija++;//TENTADOR
                 return;
             }else{
+                //indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
+                cout<<"Valor agregado: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 objPila.Pop();
                 indiceExpresionPostfija++;
+                cout<<"Valor del indice04: "<<indiceExpresionPostfija<<endl;
                 compararPrioridades(i);
-            }   
+            }
         }          
 
         void pilaAPostfija(){
@@ -94,8 +118,11 @@ class operaciones
                 if (objPila.esVacio() == true){
                     return;
                 }
+                //indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
+                cout<<"Valor agregado: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 indiceExpresionPostfija++;
+                cout<<"Valor del indice05: "<<indiceExpresionPostfija<<endl;
                 objPila.Pop();
                 pilaAPostfija();
             }      
@@ -105,8 +132,11 @@ class operaciones
             if (objPila.esVacio()){
                 return;
             }else{
+                //indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
+                cout<<"Valor agregado: "<<expresionPostfija[indiceExpresionPostfija]<<endl;
                 indiceExpresionPostfija++;
+                cout<<"Valor del indice: 06"<<indiceExpresionPostfija<<endl;
                 objPila.Pop();
                 pasarTodoContenidoDePilaAPost();
             }
