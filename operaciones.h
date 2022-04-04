@@ -64,6 +64,7 @@ class operaciones
         void calcularExpresionPostfija(){
             indiceExpresionPostfija = 0;
             vaciarExpresionPostfija();
+            auxiliar = true;
             for (int i = 0; i < expresionInfija.length() ; i++){
                 if (expresionInfija.at(i) >= 48 and expresionInfija.at(i) <= 57 || expresionInfija.at(i) >= 65 and expresionInfija.at(i) <= 90 || expresionInfija.at(i) >= 97 and expresionInfija.at(i) <= 122){
                     if (auxiliar == false){
