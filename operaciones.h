@@ -1,6 +1,7 @@
 #include <iostream>
 #include "APila.h"
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 class operaciones
@@ -12,12 +13,12 @@ class operaciones
         int tamanioExpresionPostfija = 0;
         string *expresionPostfija;
         int indiceExpresionPostfija = 0;
-        string string_expresionPostfija;
+        string *string_expresionPostfija;
         string expresionInfija;
         bool auxiliar = true;
-        int numero01 = 0;
-        int numero02 = 0;
-        int resultado = 0; 
+        double numero01 = 0;
+        double numero02 = 0;
+        double resultado = 0; 
 
     public:
         Apila objPila;
@@ -29,17 +30,25 @@ class operaciones
         }
 
         void getExpresionPostfija(){
-            //string_expresionPostfija = "";
-            //int tamanio = expresionInfija.length() - contadorParantesis;
-            
             for (int i = 0; i < tamanioExpresionPostfija; i++){
-                cout<<expresionPostfija[i]<<endl;
-                //cout<<i+1;
+                if (expresionPostfija[i] != ""){
+                    cout<<expresionPostfija[i]<<endl;
+                }
             }
-            //cout<<endl;
+            
+
+/*
+            string_expresionPostfija = new string[cont];
+
+            for (int j = 0; j < cont ; j++){
+                if ( ){
+                    /* code
+                }
+                
+                string_expresionPostfija[j] = ;
+            }*/
+            
         }
-
-
 
         void calcularParentesis(){
             contadorParantesis = 0;
@@ -77,7 +86,7 @@ class operaciones
                     auxiliar = false;
                     if (expresionInfija.at(i) != ')'){
                         if (objPila.esVacio()){
-                            objPila.Push(expresionInfija.at(i));
+                            objPila.Push( expresionInfija.substr(i,i));
                             //indiceExpresionPostfija++;
                         }else{
                             //indiceExpresionPostfija++;
@@ -93,7 +102,7 @@ class operaciones
 
         void compararPrioridades(int i){
             if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top().at(0))){
-                objPila.Push(expresionInfija.at(i));
+                objPila.Push( expresionInfija.substr(i,i)  /*expresionInfija.at(i)*/);
                 //indiceExpresionPostfija++;//TENTADOR
                 return;
             }else{
@@ -201,26 +210,29 @@ class operaciones
 
         /*void evaluarExpresion(){
             objPila.inicializar();
-            for (int i = 0; i < string_expresionPostfija.length(); i++){   
-                if (!identificadorOperandos(string_expresionPostfija.at(i))){
-                    objPila.Push(string_expresionPostfija.at(i));
-                    cout<<"Si es: "<<string_expresionPostfija.at(i)<<endl;
-                }else{
-                    if (!objPila.esVacio()){                      
-                        numero01 = (int)objPila.Top();
-                        objPila.Pop();
-                        numero02 = (int)objPila.Top();
-                        objPila.Pop();
-                        resultado = numero01 string_expresionPostfija.at(i) numero02;
-                        cout<<"No es: "<<resultado;
+            for (int i = 0; i < tamanioExpresionPostfija; i++){   
+                if (string_expresionPostfija[i] != ""){
+                    if (!identificadorOperandos(string_expresionPostfija[i])){
+                        objPila.Push(string_expresionPostfija[i]);
+                        cout<<"Si es: "<<string_expresionPostfija[i]<<endl;
+                    }else{
+                        if (!objPila.esVacio()){                      
+                            //TO DO
+                            //numero01 = (atof)objPila.Top().at();
+                            objPila.Pop();
+                            //numero02 = (atof)objPila.Top();
+                            objPila.Pop();
+                            //resultado = numero01 string_expresionPostfija.at(i) numero02;
+                            cout<<"No es: "<<resultado;
+                        }
                     }
-                }              
+                }           
             }
         }*/
 
 
-        bool identificadorOperandos(char caracterExpresionInfija){
-            switch (caracterExpresionInfija){
+        bool identificadorOperandos(string caracterExpresionInfija){
+            switch (caracterExpresionInfija.at(0)){
                 case '^':
                     return true;
                     break;

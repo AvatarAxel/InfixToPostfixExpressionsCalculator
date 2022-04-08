@@ -38,7 +38,7 @@ class Apila
             return tope;
         }
 
-        int Push(char dato){
+        int Push(string dato){
             if (!esLleno()){
                 tope++;          
                 pila[tope] = dato;
@@ -64,7 +64,7 @@ class Apila
             if (!esVacio()){
                 return pila[tope];
             }else{
-                return "ERROR";
+                return "1";
             }
         }
 
