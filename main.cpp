@@ -37,14 +37,12 @@ int main(){
         case 2:
             system("clear");
             objOperaciones.calcularExpresionPostfija();
-            //cout<<"expresion postfija: "<<objOperaciones.getExpresionPostfija()<<endl;
             objOperaciones.getExpresionPostfija();
             cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 3:
             system("clear");
-            //objOperaciones.evaluarExpresion();
             pause();
             break;
         case 4:

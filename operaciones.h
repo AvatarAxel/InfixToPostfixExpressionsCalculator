@@ -15,6 +15,7 @@ class operaciones
         int indiceExpresionPostfija = 0;
         string *string_expresionPostfija;
         string expresionInfija;
+        string string_aux;
         bool auxiliar = true;
         double numero01 = 0;
         double numero02 = 0;
@@ -35,19 +36,6 @@ class operaciones
                     cout<<expresionPostfija[i]<<endl;
                 }
             }
-            
-
-/*
-            string_expresionPostfija = new string[cont];
-
-            for (int j = 0; j < cont ; j++){
-                if ( ){
-                    /* code
-                }
-                
-                string_expresionPostfija[j] = ;
-            }*/
-            
         }
 
         void calcularParentesis(){
@@ -71,6 +59,7 @@ class operaciones
         }
 
         void calcularExpresionPostfija(){
+            string_aux = "";
             indiceExpresionPostfija = 0;
             vaciarExpresionPostfija();
             auxiliar = true;
@@ -80,16 +69,15 @@ class operaciones
                         indiceExpresionPostfija++;
                     }
                     expresionPostfija[indiceExpresionPostfija] += expresionInfija.at(i);
-                    auxiliar = true;
-                    //indiceExpresionPostfija++;                        
+                    auxiliar = true;                      
                 }else{
                     auxiliar = false;
                     if (expresionInfija.at(i) != ')'){
                         if (objPila.esVacio()){
-                            objPila.Push( expresionInfija.substr(i,i));
-                            //indiceExpresionPostfija++;
+                            string_aux = "";
+                            string_aux.append(1, expresionInfija.at(i));
+                            objPila.Push(string_aux);
                         }else{
-                            //indiceExpresionPostfija++;
                             compararPrioridades(i);
                         }                        
                     }else{
@@ -102,14 +90,14 @@ class operaciones
 
         void compararPrioridades(int i){
             if(prioridadFueraDeLaPila(expresionInfija.at(i)) > prioridadDentroDeLaPila(objPila.Top().at(0))){
-                objPila.Push( expresionInfija.substr(i,i)  /*expresionInfija.at(i)*/);
-                //indiceExpresionPostfija++;//TENTADOR
+                string_aux = "";
+                string_aux.append(1, expresionInfija.at(i));
+                objPila.Push(string_aux);
                 return;
             }else{
                 indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
                 objPila.Pop();
-                //indiceExpresionPostfija++;
                 compararPrioridades(i);
             }   
         }          
@@ -124,7 +112,6 @@ class operaciones
                 }
                 indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
-                //indiceExpresionPostfija++;
                 objPila.Pop();
                 pilaAPostfija();
             }      
@@ -136,7 +123,6 @@ class operaciones
             }else{
                 indiceExpresionPostfija++;
                 expresionPostfija[indiceExpresionPostfija] = objPila.Top().at(0);
-                //indiceExpresionPostfija++;
                 objPila.Pop();
                 pasarTodoContenidoDePilaAPost();
             }
@@ -252,8 +238,6 @@ class operaciones
                     return false;
                     break;
             }
-        }
-                                                      
-
+        }                                                    
 
 };
