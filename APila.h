@@ -42,6 +42,7 @@ class Apila
             if (!esLleno()){
                 tope++;          
                 pila[tope] = dato;
+                //cout<<dato<<endl;
                 return 0;
             }else{
                 return -1;

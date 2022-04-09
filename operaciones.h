@@ -1,7 +1,7 @@
 #include <iostream>
 #include "APila.h"
 #include <string>
-#include <cstdlib>
+#include <math.h>
 
 using namespace std;
 class operaciones
@@ -13,7 +13,6 @@ class operaciones
         int tamanioExpresionPostfija = 0;
         string *expresionPostfija;
         int indiceExpresionPostfija = 0;
-        string *string_expresionPostfija;
         string expresionInfija;
         string string_aux;
         bool auxiliar = true;
@@ -33,9 +32,10 @@ class operaciones
         void getExpresionPostfija(){
             for (int i = 0; i < tamanioExpresionPostfija; i++){
                 if (expresionPostfija[i] != ""){
-                    cout<<expresionPostfija[i]<<endl;
+                    cout<<expresionPostfija[i];
                 }
             }
+            cout<<endl;
         }
 
         void calcularParentesis(){
@@ -192,30 +192,51 @@ class operaciones
             }
         }
 
-        //Encontrar el resultado  
-
-        /*void evaluarExpresion(){
+        void evaluarExpresion(){
             objPila.inicializar();
+            resultado = 0;
             for (int i = 0; i < tamanioExpresionPostfija; i++){   
-                if (string_expresionPostfija[i] != ""){
-                    if (!identificadorOperandos(string_expresionPostfija[i])){
-                        objPila.Push(string_expresionPostfija[i]);
-                        cout<<"Si es: "<<string_expresionPostfija[i]<<endl;
+                if (expresionPostfija[i] != ""){
+                    if (!identificadorOperandos(expresionPostfija[i])){
+                        objPila.Push(expresionPostfija[i]);
                     }else{
                         if (!objPila.esVacio()){                      
-                            //TO DO
-                            //numero01 = (atof)objPila.Top().at();
+                            numero02 = stof(objPila.Top());
                             objPila.Pop();
-                            //numero02 = (atof)objPila.Top();
+                            numero01 = stof(objPila.Top());
                             objPila.Pop();
-                            //resultado = numero01 string_expresionPostfija.at(i) numero02;
-                            cout<<"No es: "<<resultado;
+                            realizarOperacion(expresionPostfija[i]);
+                            numero01 = 0;
+                            numero02 = 0;
+                            objPila.Push(to_string(resultado));
                         }
                     }
                 }           
             }
-        }*/
+            cout<<"Resultado: "<<objPila.Top()<<endl;
+        }
 
+        void realizarOperacion(string caracterExpresionPostfija){
+            switch (caracterExpresionPostfija.at(0)){
+                case '^':
+                    resultado = pow(numero01,numero02);
+                    break;
+                case '*':
+                    resultado = numero01*numero02;
+                    break;
+                case '/':
+                    resultado = numero01/numero02;
+                    break;
+                case '+':
+                    resultado = numero01+numero02;
+                    break;
+                case '-':
+                    resultado = numero01-numero02;
+                    break;
+                default:
+                    break;
+            }
+        }                             
 
         bool identificadorOperandos(string caracterExpresionInfija){
             switch (caracterExpresionInfija.at(0)){

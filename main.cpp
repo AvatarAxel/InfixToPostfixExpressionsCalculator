@@ -43,6 +43,8 @@ int main(){
             break;
         case 3:
             system("clear");
+            objOperaciones.evaluarExpresion();
+            cout<<"Presione ENTER para continuar...";
             pause();
             break;
         case 4:
